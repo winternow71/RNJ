@@ -12,7 +12,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background: #1a0a00;
+      background: #1a0d2e;
       font-family: Georgia, serif;
       overflow: hidden;
     }
@@ -35,16 +35,12 @@
       user-select: none;
     }
 
-    .envelope {
-      width: 220px;
-      height: 150px;
-      position: relative;
-    }
+    .envelope { width: 220px; height: 150px; position: relative; }
 
     .env-body {
       width: 100%; height: 100%;
-      background: #f9f3e8;
-      border: 1.5px solid #c9a86c;
+      background: #f3eef9;
+      border: 1.5px solid #b89fd4;
       border-radius: 4px;
       position: absolute; top: 0; left: 0;
     }
@@ -53,7 +49,7 @@
       width: 0; height: 0;
       border-left: 110px solid transparent;
       border-right: 110px solid transparent;
-      border-top: 80px solid #e8d9b0;
+      border-top: 80px solid #ddd0f0;
       position: absolute; top: 0; left: 0;
       transition: transform 0.6s ease;
       transform-origin: top center;
@@ -65,7 +61,7 @@
     .env-left {
       width: 0; height: 0;
       border-left: 0 solid transparent;
-      border-bottom: 75px solid #dcc99a;
+      border-bottom: 75px solid #cfc0e8;
       border-right: 110px solid transparent;
       position: absolute; bottom: 0; left: 0;
     }
@@ -73,33 +69,31 @@
     .env-right {
       width: 0; height: 0;
       border-right: 0 solid transparent;
-      border-bottom: 75px solid #d4be8a;
+      border-bottom: 75px solid #c4b2e0;
       border-left: 110px solid transparent;
       position: absolute; bottom: 0; right: 0;
     }
 
     .seal {
       width: 36px; height: 36px;
-      background: #8b1a1a;
+      background: #7c4daa;
       border-radius: 50%;
       position: absolute;
       top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       z-index: 3;
       display: flex; align-items: center; justify-content: center;
-      color: #f9e0c0; font-size: 18px;
-      border: 2px solid #6b0f0f;
+      color: #f3eef9; font-size: 18px;
+      border: 2px solid #5a3080;
       transition: transform 0.3s;
     }
 
-    #envelope-wrap:hover .seal {
-      transform: translate(-50%, -50%) scale(1.1);
-    }
+    #envelope-wrap:hover .seal { transform: translate(-50%, -50%) scale(1.1); }
 
     .tap-hint {
       margin-top: 16px;
       font-size: 13px;
-      color: #c9a86c;
+      color: #c4b2e0;
       letter-spacing: 0.05em;
     }
 
@@ -112,21 +106,21 @@
     }
 
     .letter {
-      background: #fdf8ef;
-      border: 1px solid #d4c090;
+      background: #faf7ff;
+      border: 1px solid #c4b2e0;
       border-radius: 4px;
       padding: 2rem 2rem 1.5rem;
       width: 100%;
       text-align: center;
       position: relative;
-      box-shadow: 0 2px 24px rgba(0,0,0,0.4);
+      box-shadow: 0 2px 24px rgba(100,60,160,0.3);
     }
 
     .letter::before {
       content: '';
       position: absolute;
       top: 8px; left: 8px; right: 8px; bottom: 8px;
-      border: 1px solid #e8d5a3;
+      border: 1px solid #ddd0f0;
       border-radius: 2px;
       pointer-events: none;
     }
@@ -135,39 +129,41 @@
 
     .letter-title {
       font-size: 22px; font-weight: 500;
-      color: #5a1a1a; margin-bottom: 4px;
+      color: #4a2070; margin-bottom: 4px;
     }
 
     .letter-sub {
-      font-size: 13px; color: #8b6e4e;
+      font-size: 13px; color: #7c5a9e;
       letter-spacing: 0.1em; text-transform: uppercase;
       margin-bottom: 20px;
     }
 
     .letter-divider {
       height: 1px;
-      background: linear-gradient(to right, transparent, #d4c090, transparent);
+      background: linear-gradient(to right, transparent, #c4b2e0, transparent);
       margin: 0 0 20px;
     }
 
     .letter-body {
       font-size: 15px; line-height: 1.8;
-      color: #3d2b1f; margin-bottom: 24px;
+      color: #3a2050; margin-bottom: 24px;
     }
 
-    .letter-body em { color: #8b1a1a; font-style: italic; }
+    .letter-body em { color: #7c4daa; font-style: italic; }
 
     .btn-group {
       display: flex;
       gap: 16px;
       justify-content: center;
+      align-items: center;
       margin-top: 8px;
+      width: 100%;
     }
 
     .btn-yes {
       padding: 10px 28px;
-      background: #8b1a1a;
-      color: #fdf8ef;
+      background: #7c4daa;
+      color: #faf7ff;
       border: none;
       border-radius: 4px;
       font-size: 15px;
@@ -176,20 +172,33 @@
       transition: background 0.2s, transform 0.1s;
     }
 
-    .btn-yes:hover { background: #6b0f0f; transform: scale(1.03); }
+    .btn-yes:hover { background: #5a3080; transform: scale(1.03); }
 
-    .btn-no {
+    .btn-no-placeholder {
       padding: 10px 28px;
       background: transparent;
-      color: #8b6e4e;
-      border: 1px solid #c9a86c;
+      color: #7c5a9e;
+      border: 1px solid #b89fd4;
+      border-radius: 4px;
+      font-size: 15px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-no-fly {
+      padding: 10px 28px;
+      background: #faf7ff;
+      color: #7c5a9e;
+      border: 1px solid #b89fd4;
       border-radius: 4px;
       font-size: 15px;
       font-family: Georgia, serif;
       cursor: pointer;
       position: fixed;
-      display: none;
       white-space: nowrap;
+      display: none;
+      z-index: 999;
       transition: left 0.05s, top 0.05s;
     }
 
@@ -200,17 +209,12 @@
     }
 
     .accept-icon { font-size: 40px; margin-bottom: 12px; }
-
     .accept-title {
-      font-size: 22px; color: #c9a86c;
-      font-family: Georgia, serif;
-      margin-bottom: 8px;
+      font-size: 22px; color: #c4b2e0;
+      font-family: Georgia, serif; margin-bottom: 8px;
     }
-
     .accept-body {
-      font-size: 14px;
-      color: #a08060;
-      line-height: 1.7;
+      font-size: 14px; color: #a090c0; line-height: 1.7;
     }
   </style>
 </head>
@@ -230,7 +234,7 @@
 
   <div id="letter-wrap">
     <div class="letter">
-      <div class="letter-rose">🌹</div>
+      <div class="letter-rose">🌸</div>
       <div class="letter-title">초대장</div>
       <div class="letter-sub">Montague &amp; Capulet</div>
       <div class="letter-divider"></div>
@@ -243,6 +247,7 @@
       </div>
       <div class="btn-group">
         <button class="btn-yes" id="btn-yes" onclick="acceptInvite()">예, 함께하겠습니다</button>
+        <button class="btn-no-placeholder" id="btn-no-placeholder" onmouseenter="activateFly()" ontouchstart="activateFly()">아니오</button>
       </div>
     </div>
   </div>
@@ -252,50 +257,57 @@
     <div class="accept-title">감사합니다!</div>
     <div class="accept-body">
       오늘 밤 베로나에서 만나요.<br>
-      🌹 두 별의 운명이 엇갈리는 그 순간,<br>
+      🌸 두 별의 운명이 엇갈리는 그 순간,<br>
       함께하게 되어 영광입니다.
     </div>
   </div>
 </div>
 
-<button class="btn-no" id="btn-no" onmouseenter="runAway(this)" ontouchstart="runAway(this)">아니오</button>
+<button class="btn-no-fly" id="btn-no-fly" onmouseenter="runAway(this)" ontouchstart="runAway(this)">아니오</button>
 
 <script>
-  var noBtn = document.getElementById('btn-no');
-  var noBtnVisible = false;
+  var flyBtn = document.getElementById('btn-no-fly');
+  var placeholder = document.getElementById('btn-no-placeholder');
+  var activated = false;
 
   function openEnvelope() {
     document.getElementById('flap').classList.add('open');
     setTimeout(function() {
       document.getElementById('envelope-wrap').style.display = 'none';
-      var lw = document.getElementById('letter-wrap');
-      lw.style.display = 'flex';
-      setTimeout(positionNoBtnNextToYes, 50);
+      document.getElementById('letter-wrap').style.display = 'flex';
     }, 700);
   }
 
-  function positionNoBtnNextToYes() {
-    var yesBtn = document.getElementById('btn-yes');
-    var rect = yesBtn.getBoundingClientRect();
-    noBtn.style.left = (rect.right + 16) + 'px';
-    noBtn.style.top = rect.top + 'px';
-    noBtn.style.display = 'block';
-    noBtnVisible = true;
+  function activateFly() {
+    if (activated) return;
+    activated = true;
+
+    var rect = placeholder.getBoundingClientRect();
+    flyBtn.style.left = rect.left + 'px';
+    flyBtn.style.top = rect.top + 'px';
+    flyBtn.style.width = rect.width + 'px';
+    flyBtn.style.display = 'block';
+
+    placeholder.style.visibility = 'hidden';
+    placeholder.onmouseenter = null;
+    placeholder.ontouchstart = null;
+
+    setTimeout(function() { runAway(flyBtn); }, 30);
   }
 
   function runAway(btn) {
     var margin = 24;
     var maxX = window.innerWidth - btn.offsetWidth - margin;
     var maxY = window.innerHeight - btn.offsetHeight - margin;
-
+    var curX = parseFloat(btn.style.left) || 0;
+    var curY = parseFloat(btn.style.top) || 0;
     var newX, newY, tries = 0;
+
     do {
       newX = margin + Math.random() * (maxX - margin);
       newY = margin + Math.random() * (maxY - margin);
       tries++;
-    } while (tries < 20 &&
-      Math.abs(newX - parseFloat(btn.style.left || 0)) < 80 &&
-      Math.abs(newY - parseFloat(btn.style.top || 0)) < 40);
+    } while (tries < 30 && Math.abs(newX - curX) < 100 && Math.abs(newY - curY) < 60);
 
     btn.style.left = newX + 'px';
     btn.style.top = newY + 'px';
@@ -303,13 +315,9 @@
 
   function acceptInvite() {
     document.getElementById('letter-wrap').style.display = 'none';
-    noBtn.style.display = 'none';
+    flyBtn.style.display = 'none';
     document.getElementById('accept-msg').style.display = 'block';
   }
-
-  window.addEventListener('resize', function() {
-    if (noBtnVisible) positionNoBtnNextToYes();
-  });
 </script>
 
 </body>
