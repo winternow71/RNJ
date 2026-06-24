@@ -169,6 +169,7 @@
       font-size: 15px;
       font-family: Georgia, serif;
       cursor: pointer;
+      letter-spacing: 0.08em;
       transition: background 0.2s, transform 0.1s;
     }
 
@@ -184,6 +185,7 @@
       font-family: Georgia, serif;
       cursor: pointer;
       white-space: nowrap;
+      letter-spacing: 0.08em;
     }
 
     .btn-no-fly {
@@ -199,7 +201,7 @@
       white-space: nowrap;
       display: none;
       z-index: 999;
-      transition: left 0.05s, top 0.05s;
+      letter-spacing: 0.08em;
     }
 
     #accept-msg {
@@ -208,13 +210,14 @@
       padding: 2rem;
     }
 
-    .accept-icon { font-size: 40px; margin-bottom: 12px; }
     .accept-title {
       font-size: 22px; color: #c4b2e0;
-      font-family: Georgia, serif; margin-bottom: 8px;
+      font-family: Georgia, serif;
+      margin-bottom: 12px;
     }
+
     .accept-body {
-      font-size: 14px; color: #a090c0; line-height: 1.7;
+      font-size: 14px; color: #a090c0; line-height: 1.8;
     }
   </style>
 </head>
@@ -246,24 +249,23 @@
         — 촛불 아래, 베로나에서
       </div>
       <div class="btn-group">
-        <button class="btn-yes" id="btn-yes" onclick="acceptInvite()">예, 함께하겠습니다</button>
-        <button class="btn-no-placeholder" id="btn-no-placeholder" onmouseenter="activateFly()" ontouchstart="activateFly()">아니오</button>
+        <button class="btn-yes" id="btn-yes" onclick="acceptInvite()">YES</button>
+        <button class="btn-no-placeholder" id="btn-no-placeholder" onmouseenter="activateFly()" ontouchstart="activateFly()">NO</button>
       </div>
     </div>
   </div>
 
   <div id="accept-msg">
-    <div class="accept-icon">🎭</div>
     <div class="accept-title">감사합니다!</div>
     <div class="accept-body">
       오늘 밤 베로나에서 만나요.<br>
-      🌸 두 별의 운명이 엇갈리는 그 순간,<br>
+      두 별의 운명이 엇갈리는 그 순간,<br>
       함께하게 되어 영광입니다.
     </div>
   </div>
 </div>
 
-<button class="btn-no-fly" id="btn-no-fly" onmouseenter="runAway(this)" ontouchstart="runAway(this)">아니오</button>
+<button class="btn-no-fly" id="btn-no-fly" onmouseenter="runAway(this)" ontouchstart="runAway(this)">NO</button>
 
 <script>
   var flyBtn = document.getElementById('btn-no-fly');
