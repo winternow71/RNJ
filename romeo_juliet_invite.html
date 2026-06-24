@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로미오와 줄리엣 초대장</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #1a0a00;
+      font-family: Georgia, serif;
+      overflow: hidden;
+    }
+
+    #stage {
+      min-height: 100vh;
+      width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      position: relative;
+    }
+
+    #envelope-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .envelope {
+      width: 220px;
+      height: 150px;
+      position: relative;
+    }
+
+    .env-body {
+      width: 100%; height: 100%;
+      background: #f9f3e8;
+      border: 1.5px solid #c9a86c;
+      border-radius: 4px;
+      position: absolute; top: 0; left: 0;
+    }
+
+    .env-flap {
+      width: 0; height: 0;
+      border-left: 110px solid transparent;
+      border-right: 110px solid transparent;
+      border-top: 80px solid #e8d9b0;
+      position: absolute; top: 0; left: 0;
+      transition: transform 0.6s ease;
+      transform-origin: top center;
+      z-index: 2;
+    }
+
+    .env-flap.open { transform: rotateX(180deg); }
+
+    .env-left {
+      width: 0; height: 0;
+      border-left: 0 solid transparent;
+      border-bottom: 75px solid #dcc99a;
+      border-right: 110px solid transparent;
+      position: absolute; bottom: 0; left: 0;
+    }
+
+    .env-right {
+      width: 0; height: 0;
+      border-right: 0 solid transparent;
+      border-bottom: 75px solid #d4be8a;
+      border-left: 110px solid transparent;
+      position: absolute; bottom: 0; right: 0;
+    }
+
+    .seal {
+      width: 36px; height: 36px;
+      background: #8b1a1a;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      display: flex; align-items: center; justify-content: center;
+      color: #f9e0c0; font-size: 18px;
+      border: 2px solid #6b0f0f;
+      transition: transform 0.3s;
+    }
+
+    #envelope-wrap:hover .seal {
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+
+    .tap-hint {
+      margin-top: 16px;
+      font-size: 13px;
+      color: #c9a86c;
+      letter-spacing: 0.05em;
+    }
+
+    #letter-wrap {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      max-width: 400px;
+      width: 100%;
+    }
+
+    .letter {
+      background: #fdf8ef;
+      border: 1px solid #d4c090;
+      border-radius: 4px;
+      padding: 2rem 2rem 1.5rem;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.4);
+    }
+
+    .letter::before {
+      content: '';
+      position: absolute;
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
+      border: 1px solid #e8d5a3;
+      border-radius: 2px;
+      pointer-events: none;
+    }
+
+    .letter-rose { font-size: 28px; margin-bottom: 8px; }
+
+    .letter-title {
+      font-size: 22px; font-weight: 500;
+      color: #5a1a1a; margin-bottom: 4px;
+    }
+
+    .letter-sub {
+      font-size: 13px; color: #8b6e4e;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .letter-divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #d4c090, transparent);
+      margin: 0 0 20px;
+    }
+
+    .letter-body {
+      font-size: 15px; line-height: 1.8;
+      color: #3d2b1f; margin-bottom: 24px;
+    }
+
+    .letter-body em { color: #8b1a1a; font-style: italic; }
+
+    .btn-group {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 8px;
+    }
+
+    .btn-yes {
+      padding: 10px 28px;
+      background: #8b1a1a;
+      color: #fdf8ef;
+      border: none;
+      border-radius: 4px;
+      font-size: 15px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    .btn-yes:hover { background: #6b0f0f; transform: scale(1.03); }
+
+    .btn-no {
+      padding: 10px 28px;
+      background: transparent;
+      color: #8b6e4e;
+      border: 1px solid #c9a86c;
+      border-radius: 4px;
+      font-size: 15px;
+      font-family: Georgia, serif;
+      cursor: pointer;
+      position: fixed;
+      display: none;
+      white-space: nowrap;
+      transition: left 0.05s, top 0.05s;
+    }
+
+    #accept-msg {
+      display: none;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .accept-icon { font-size: 40px; margin-bottom: 12px; }
+
+    .accept-title {
+      font-size: 22px; color: #c9a86c;
+      font-family: Georgia, serif;
+      margin-bottom: 8px;
+    }
+
+    .accept-body {
+      font-size: 14px;
+      color: #a08060;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+
+<div id="stage">
+  <div id="envelope-wrap" onclick="openEnvelope()">
+    <div class="envelope">
+      <div class="env-body"></div>
+      <div class="env-left"></div>
+      <div class="env-right"></div>
+      <div class="env-flap" id="flap"></div>
+      <div class="seal">♥</div>
+    </div>
+    <div class="tap-hint">클릭하여 열어보기</div>
+  </div>
+
+  <div id="letter-wrap">
+    <div class="letter">
+      <div class="letter-rose">🌹</div>
+      <div class="letter-title">초대장</div>
+      <div class="letter-sub">Montague &amp; Capulet</div>
+      <div class="letter-divider"></div>
+      <div class="letter-body">
+        당신을 위한 특별한 밤에<br>
+        정중히 초대합니다.<br><br>
+        <em>로미오와 줄리엣</em>을<br>
+        함께 관람하시겠습니까?<br><br>
+        — 촛불 아래, 베로나에서
+      </div>
+      <div class="btn-group">
+        <button class="btn-yes" id="btn-yes" onclick="acceptInvite()">예, 함께하겠습니다</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="accept-msg">
+    <div class="accept-icon">🎭</div>
+    <div class="accept-title">감사합니다!</div>
+    <div class="accept-body">
+      오늘 밤 베로나에서 만나요.<br>
+      🌹 두 별의 운명이 엇갈리는 그 순간,<br>
+      함께하게 되어 영광입니다.
+    </div>
+  </div>
+</div>
+
+<button class="btn-no" id="btn-no" onmouseenter="runAway(this)" ontouchstart="runAway(this)">아니오</button>
+
+<script>
+  var noBtn = document.getElementById('btn-no');
+  var noBtnVisible = false;
+
+  function openEnvelope() {
+    document.getElementById('flap').classList.add('open');
+    setTimeout(function() {
+      document.getElementById('envelope-wrap').style.display = 'none';
+      var lw = document.getElementById('letter-wrap');
+      lw.style.display = 'flex';
+      setTimeout(positionNoBtnNextToYes, 50);
+    }, 700);
+  }
+
+  function positionNoBtnNextToYes() {
+    var yesBtn = document.getElementById('btn-yes');
+    var rect = yesBtn.getBoundingClientRect();
+    noBtn.style.left = (rect.right + 16) + 'px';
+    noBtn.style.top = rect.top + 'px';
+    noBtn.style.display = 'block';
+    noBtnVisible = true;
+  }
+
+  function runAway(btn) {
+    var margin = 24;
+    var maxX = window.innerWidth - btn.offsetWidth - margin;
+    var maxY = window.innerHeight - btn.offsetHeight - margin;
+
+    var newX, newY, tries = 0;
+    do {
+      newX = margin + Math.random() * (maxX - margin);
+      newY = margin + Math.random() * (maxY - margin);
+      tries++;
+    } while (tries < 20 &&
+      Math.abs(newX - parseFloat(btn.style.left || 0)) < 80 &&
+      Math.abs(newY - parseFloat(btn.style.top || 0)) < 40);
+
+    btn.style.left = newX + 'px';
+    btn.style.top = newY + 'px';
+  }
+
+  function acceptInvite() {
+    document.getElementById('letter-wrap').style.display = 'none';
+    noBtn.style.display = 'none';
+    document.getElementById('accept-msg').style.display = 'block';
+  }
+
+  window.addEventListener('resize', function() {
+    if (noBtnVisible) positionNoBtnNextToYes();
+  });
+</script>
+
+</body>
+</html>
